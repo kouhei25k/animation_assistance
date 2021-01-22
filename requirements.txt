@@ -11,7 +11,7 @@ django-cors-headers==3.6.0
 django-filter==2.4.0
 djangorestframework==3.12.2
 idna==2.10
-numpy @ file:///D:/bld/numpy_1610324712085/work
+numpy==1.19.5
 oauthlib==3.1.0
 Pillow==8.1.0
 pycparser==2.20
