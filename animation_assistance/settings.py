@@ -156,7 +156,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 CORS_ORIGIN_WHITELIST = [
-    'https://vue-align-tap-fqwq7nwzw.vercel.app'
+    os.environ['CLIENT_URL']
 ]
 
 
