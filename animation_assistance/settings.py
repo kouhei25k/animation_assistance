@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -155,8 +156,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8080',
-    'http://192.168.11.2:8080',
     'https://vue-align-tap-fqwq7nwzw.vercel.app'
 ]
 
