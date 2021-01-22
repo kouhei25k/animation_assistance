@@ -4,5 +4,6 @@ from django.contrib import admin
 from .models import *
 
 admin.site.register(BaseImage)
-admin.site.register(UnprocessedImage)
 admin.site.register(ProcessedImage)
+admin.site.register(ImageGroup)
+

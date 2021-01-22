@@ -20,11 +20,15 @@ from django.views.static import serve
 from django.conf import settings
 from align_tap import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(align_tap_router.urls)),
     path('api/align/', views.align_image,name="align"),
-    path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/download/', views.DownloadList),
+    # path('api/align2/',CreateProcessedImageView.as_view() ,name="create_align"),
+    path('auth/', include('dj_rest_auth.urls')),
+    path('auth/registration/', include('dj_rest_auth.registration.urls')),
     re_path('media/(?P<path>.*)', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path('api/(?P<group>.+)/$', views.ImageList.as_view()),
 ]
