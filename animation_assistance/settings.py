@@ -159,6 +159,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SESSION_COOKIE_HTTPONLY = True
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(db_from_env)
+
 try:
     from .local_settings import *
 except ImportError:
@@ -166,12 +169,6 @@ except ImportError:
 
 if not DEBUG:
     SECRET_KEY = os.environ['SECRET_KEY']
-    CORS_ORIGIN_WHITELIST = [
-    os.environ['CLIENT_URL']
-]
+    CORS_ORIGIN_WHITELIST = [os.environ['CLIENT_URL']]
     import django_heroku
     django_heroku.settings(locals()) 
-
-
-db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'].update(db_from_env)
