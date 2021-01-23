@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SITE_ID=1
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -155,11 +155,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-CORS_ORIGIN_WHITELIST = [
-    os.environ['CLIENT_URL']
-]
-
-
 SESSION_COOKIE_HTTPONLY = True
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
@@ -168,8 +163,11 @@ try:
 except ImportError:
     pass
 
-# if not DEBUG:
+if not DEBUG:
     SECRET_KEY = os.environ['SECRET_KEY']
+    CORS_ORIGIN_WHITELIST = [
+    os.environ['CLIENT_URL']
+]
     import django_heroku
     django_heroku.settings(locals()) 
 

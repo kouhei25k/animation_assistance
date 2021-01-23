@@ -127,7 +127,7 @@ def align_image(request):
         if request.POST.get('folder') == "undefined":
             folder_name = image_list[0]
         else:
-            folder_name = request.POST.get('folder')[1:]
+            folder_name = request.POST.get('folder')
 
         post_use_base = request.POST.get('base')
         base_image_objects = BaseImage.objects.get(name=post_use_base)
