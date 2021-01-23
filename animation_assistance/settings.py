@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ID=1
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 
@@ -167,7 +167,7 @@ try:
 except ImportError:
     pass
 
-if not DEBUG:
+if DEBUG:
     SECRET_KEY = os.environ['SECRET_KEY']
     CORS_ORIGIN_WHITELIST = [os.environ['CLIENT_URL']]
     import django_heroku
