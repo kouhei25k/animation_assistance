@@ -13,17 +13,16 @@ class BaseImage(models.Model):
     def __str__(self):
         return self.name
 
-class ImageGroup(models.Model):
+
+
+class ProcessedImage(models.Model):
+    image = models.ImageField(upload_to='processed/')
+
+class ProcessedImageGroup(models.Model):
     user = models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
+    base = models.ForeignKey(BaseImage, on_delete=models.SET_NULL, null=True )
     name = models.CharField(max_length=32 )
+    images = models.ManyToManyField(ProcessedImage)
 
     def __str__(self):
         return self.name
-
-class ProcessedImage(models.Model):
-    user = models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
-    group = models.ForeignKey(ImageGroup,on_delete=models.CASCADE)
-    base = models.ForeignKey(BaseImage, on_delete=models.SET_NULL, null=True )
-    image = models.ImageField(upload_to='processed/')
-
-    

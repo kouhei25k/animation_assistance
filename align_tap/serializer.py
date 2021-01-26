@@ -8,41 +8,33 @@ from django.core.files.storage import default_storage
 from dj_rest_auth.serializers import UserDetailsSerializer
 from django.contrib.auth.models import User
 
-# class UserSerializer(UserDetailsSerializer):
-#     class Meta:
-#         model = User
-#         fields ='__all__'
-
 
 class BaseImageSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    id = serializers.ReadOnlyField()
     class Meta:
         model = BaseImage
-        fields = ('user','name', 'image', 'pt1', 'pt2')
+        read_only_fields = ['id',]
+        fields = ('id','user', 'name', 'image', 'pt1', 'pt2')
 
 class ProcessedImageSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    class Meta:
-        model = ProcessedImage
-        fields = ('user','base', 'image')
-
-
-class ImageGroupSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    class Meta:
-        model = ImageGroup
-        fields = ('user','name')
-
-
-
-class ImageSerializer(serializers.Serializer):
     image = serializers.ImageField()
-
-class CreateProcessedImageSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    image = ImageSerializer(many=True)
     class Meta:
         model = ProcessedImage
-        fields = ('user','base', 'image')
+        fields =  "__all__"
 
+class ProcessedImageGroupSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    base = BaseImageSerializer(read_only=True)
+    images = ProcessedImageSerializer(many=True,read_only=True)
+    class Meta:
+        model = ProcessedImageGroup
+        fields =  ('user','base', 'name', 'images')
 
+class ImagesSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    images = ProcessedImageSerializer(many=True)
+    
+    class Meta:
+        model = ProcessedImageGroup
+        fields = ['user','base', 'name', 'images']

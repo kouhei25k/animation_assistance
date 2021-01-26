@@ -167,7 +167,7 @@ try:
 except ImportError:
     pass
 
-if DEBUG:
+if not DEBUG:
     SECRET_KEY = os.environ['SECRET_KEY']
     CORS_ORIGIN_WHITELIST = [os.environ['CLIENT_URL']]
     import django_heroku

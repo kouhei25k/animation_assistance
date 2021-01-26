@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='ImageGroup',
+            name='ProcessedImageGroup',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=32)),
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', models.ImageField(upload_to='processed/')),
                 ('base', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='align_tap.baseimage')),
-                ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='align_tap.imagegroup')),
+                ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='align_tap.ProcessedImageGroup')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

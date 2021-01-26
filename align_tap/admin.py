@@ -5,5 +5,5 @@ from .models import *
 
 admin.site.register(BaseImage)
 admin.site.register(ProcessedImage)
-admin.site.register(ImageGroup)
+admin.site.register(ProcessedImageGroup)
 

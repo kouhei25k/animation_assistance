@@ -3,3 +3,7 @@ __pycache__
 db.sqlite3
 local_settings.py
 debug.log
+
+
+media/processed/*
+!media/processed/*.jpg
